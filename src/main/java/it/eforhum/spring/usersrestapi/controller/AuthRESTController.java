@@ -32,22 +32,18 @@ public class AuthRESTController {
 	
 	@PostMapping(value = "/login")
 	public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-		
 		log.info("Auth Controller");
 		log.info("username: {}, password: {}", username, password);
-		
 		return this.jwtUtil.generateToken(username); 
 	}
 	
 	@GetMapping(value = "/forbidden")
-	public void loginPage(HttpServletResponse response) throws IOException {	
-		
+	public void loginPage(HttpServletResponse response) throws IOException {
 		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 	}
 	
 	@GetMapping(value = "/genpass")
 	public String generatePassword(@RequestParam("p") String password) {
-		
 		return this.passwordEncoder.encode(password);
 	}
 }

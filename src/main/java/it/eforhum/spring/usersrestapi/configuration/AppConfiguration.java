@@ -11,9 +11,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -53,6 +56,7 @@ public class AppConfiguration {
 //		disabilito il controllo CSRF e chiedo di autenticare tutte le API esposte
 		http.csrf().disable()
 			.authorizeRequests()
+//				Accetto tutte le richieste in get
 			.antMatchers(HttpMethod.GET, "/auth/genpass")
 			.permitAll()
 			.anyRequest().authenticated()
@@ -61,8 +65,7 @@ public class AppConfiguration {
 			.and()
 //			serve ad abilitare il filtro UsernamePasswordAuthenticationFilter
 //			e permettere di inviare le credenziali al path "/login"
-			.formLogin().successForwardUrl("/auth/login")
-			;
+			.formLogin().successForwardUrl("/auth/login");
 		
 //		http.addFilterBefore(this.testFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -75,31 +78,28 @@ public class AppConfiguration {
 	
 	@Bean
 	public PasswordEncoder passEncoder() {
-		
 		return new BCryptPasswordEncoder();
 	}
 
 //	opzione 1
-	
+//	I token vengono salvati in memoria
 //	@Bean
 //    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//            .username("user1")
-//            .password("345")
-//            .roles("USER")
-//            .build();
+//        UserDetails user = User.withUsername("erfascio")
+//				.password(passEncoder().encode("juventus"))
+//				.roles("USER")
+//				.build();
 //        return new InMemoryUserDetailsManager(user);
 //    }
 	
 //	opzione 2
-	
-//	@Bean
-//	public JdbcDaoImpl userDetailsService() {
-//		
-//		JdbcDaoImpl jdbcDaoImpl = new JdbcDaoImpl();
-//		jdbcDaoImpl.setDataSource(this.dataSource);
-//		return jdbcDaoImpl;
-//	}
+//	I token vengono salvati in memoria
+	@Bean
+	public JdbcDaoImpl userDetailsService() {
+		JdbcDaoImpl jdbcDaoImpl = new JdbcDaoImpl();
+		jdbcDaoImpl.setDataSource(this.dataSource);
+		return jdbcDaoImpl;
+	}
 	
 //	opzione 3
 //	creare un proprio Custom Bean che implementa l'interfaccia UserDetailsService

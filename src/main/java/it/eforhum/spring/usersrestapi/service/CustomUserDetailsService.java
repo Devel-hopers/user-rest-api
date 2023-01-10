@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Component
+// @Component
 public class CustomUserDetailsService implements UserDetailsService{
 
 	@Autowired
@@ -18,7 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
 		return new User("user1", passwordEncoder.encode("345"), Collections.emptyList());
 	}
 
