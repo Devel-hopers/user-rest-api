@@ -23,27 +23,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-
 		log.info("START JwtAuthenticationFilter");
-		
 		final String requestTokenHeader = request.getHeader("Authorization");
-		
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get
 		// only the Token
-
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-		
 			SecurityContext context = SecurityContextHolder.createEmptyContext();
-	
 //			creo l'oggetto che rappresenta l'utente autenticato
 			Authentication authentication = new JwtAuthenticationToken("jwt-token-content"); 
 			context.setAuthentication(authentication);
-	
 //			inserisco nel SecurityContext l'oggetto che rappresente l'utente autenticato
 			SecurityContextHolder.setContext(context);
-		}		
+		}
+//		!important
 		filterChain.doFilter(request, response);
-		
 		log.info("Finished JwtAuthenticationFilter");
 	}
 

@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-//@Component
+// @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
 	private static Logger log = LogManager.getLogger(JwtAuthenticationProvider.class);
@@ -27,13 +27,20 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 //		all'interno del Provider verifico che l'utente 
 		
 //		TODO gestione autenticazione errata in caso di token JWT non valido		
-		
+
+//		Validazione del token jwt qui
+		String originalToken = jwtAuth.getOriginalJwtToken();
+
 //		if (true) {
 //			throw new JwtAuthenticationException("Invalid JWT Token");
 //		}
-		
-		String username = "user1";
+
+		String username = "erfascio";
+//		String username = JwtTokenUtil.getUsernameFromToken(originalToken);
+
+//		La password può rimanere vuota perchè non ci interessa in questo punto
 		String password = "";
+
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
