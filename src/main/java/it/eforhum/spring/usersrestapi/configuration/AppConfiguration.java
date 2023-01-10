@@ -2,6 +2,8 @@ package it.eforhum.spring.usersrestapi.configuration;
 
 import javax.sql.DataSource;
 
+import it.eforhum.spring.usersrestapi.filter.TestSecurityFilter;
+import it.eforhum.spring.usersrestapi.service.CustomUserDetailsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
