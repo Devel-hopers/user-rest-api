@@ -8,7 +8,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.eforhum.spring</groupId>
-	<artifactId>users-rest-api</artifactId>
+	<artifactId>users-rest-api-docker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>users-rest-api</name>
 	<description>Demo project for Spring Boot</description>
