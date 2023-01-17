@@ -96,12 +96,12 @@ public class AppConfiguration {
 	
 //	opzione 2
 //	I token vengono salvati in memoria
-	@Bean
-	public JdbcDaoImpl userDetailsService() {
-		JdbcDaoImpl jdbcDaoImpl = new JdbcDaoImpl();
-		jdbcDaoImpl.setDataSource(this.dataSource);
-		return jdbcDaoImpl;
-	}
+//	@Bean
+//	public JdbcDaoImpl userDetailsService() {
+//		JdbcDaoImpl jdbcDaoImpl = new JdbcDaoImpl();
+//		jdbcDaoImpl.setDataSource(this.dataSource);
+//		return jdbcDaoImpl;
+//	}
 	
 //	opzione 3
 //	creare un proprio Custom Bean che implementa l'interfaccia UserDetailsService

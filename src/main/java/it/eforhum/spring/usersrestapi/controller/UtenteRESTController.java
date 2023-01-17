@@ -30,7 +30,7 @@ public class UtenteRESTController {
 	@Autowired
 	private UtenteService service;
 	
-	@GetMapping(value = "/")
+	@GetMapping
 	public List<Utente> findAll() {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -59,7 +59,6 @@ public class UtenteRESTController {
 	
 	@GetMapping(value = "/{id}")
 	public Utente findById(@PathVariable("id") int id) {
-		
 		return this.service.findById(id);
 	}
 	
