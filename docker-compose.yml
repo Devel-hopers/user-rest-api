@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  service-mysql:
+    image: "mysql:8.0"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3326:3306"
+    networks:
+      - network1
+  api:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=collaudo
+    ports:
+      - "9080:9080"
+    networks:
+      - network1
+    depends_on:
+      - service-mysql
+volumes:
+  mysql-data:
+  
+networks:
+  network1:
+    name: jdv-network
+    external: true
