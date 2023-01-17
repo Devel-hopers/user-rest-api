@@ -4,9 +4,9 @@ services:
     image: "mysql:8.0"
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=api
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3326:3306"
     networks:
@@ -21,6 +21,7 @@ services:
       - network1
     depends_on:
       - service-mysql
+    restart: always
 volumes:
   mysql-data:
   
