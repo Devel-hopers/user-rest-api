@@ -1,12 +1,11 @@
 package it.eforhum.spring.usersrestapi.service;
 
-import javax.persistence.EntityNotFoundException;
-
+import it.eforhum.spring.usersrestapi.dao.UtenteDao;
+import it.eforhum.spring.usersrestapi.entity.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.eforhum.spring.usersrestapi.dao.UtenteDao;
-import it.eforhum.spring.usersrestapi.entity.Utente;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class UtenteService {
